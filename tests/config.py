@@ -6,6 +6,8 @@ from tests.tools.config.kafka import KafkaClientTestConfig
 from tests.tools.config.grpc import GRPCServerTestConfig
 from tests.tools.config.http import HTTPServerTestConfig
 
+from tests.tools.config.postgres import PostgresClientTestConfig
+
 class TestSettings(BaseSettings):
     """
     Корневая конфигурация тестового окружения.
@@ -30,6 +32,8 @@ class TestSettings(BaseSettings):
     operations_http_client: HTTPClientTestConfig
     operations_grpc_client: GRPCClientTestConfig
     operations_kafka_client: KafkaClientTestConfig
+
+    operations_postgres_client: PostgresClientTestConfig
 
     operations_processing_wait_timeout: float
     """
