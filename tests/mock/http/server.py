@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from tests.config import test_settings
 from tests.mock.http.api.cards import cards_mock_router
 from tests.mock.http.api.users import users_mock_router
+from tests.mock.http.api.accounts import account_mock_router
 
 # HTTP мок-сервис — это отдельное приложение,
 # которое моделирует внешний мир для gateway и других сервисов.
@@ -22,6 +23,7 @@ app = FastAPI(title="mock-service")
 # в единый HTTP-контур.
 app.include_router(users_mock_router)
 app.include_router(cards_mock_router)
+app.include_router(account_mock_router)
 
 if __name__ == "__main__":
     # HTTP мок-сервис запускается как самостоятельный процесс.
