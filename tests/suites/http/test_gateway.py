@@ -5,7 +5,9 @@ import pytest
 # Эти функции инкапсулируют бизнес-проверки ответа gateway
 # и скрывают всю логику сравнения вложенных сущностей.
 from tests.assertions.http.gateway import (
-    assert_get_user_details_response_user_with_active_credit_card_account, assert_get_user_details_response_user_with_active_debit_card_account,
+    assert_get_user_details_response_user_with_active_credit_card_account,
+    assert_get_user_details_response_user_with_active_debit_card_account,
+    assert_get_account_details_response_user_with_active_debit_card_account
 )
 
 # HTTP API-клиент gateway-service тестового слоя.
@@ -101,6 +103,23 @@ class TestGatewayHTTP:
         # Тест не сравнивает JSON, не перебирает поля
         # и не знает, откуда взялись ожидаемые данные.
         assert_get_user_details_response_user_with_active_credit_card_account(
+            response
+        )
+
+
+    @allure.story(AllureStory.GET_ACCOUNT_DETAILS)
+    @allure.title("[HTTP] Get account details. User with active debit card account")
+    def test_get_account_details_user_with_active_debit_card_account(
+        self,
+        gateway_http_test_client: GatewayHTTPTestClient,
+    ):
+        response = gateway_http_test_client.get_account_details(
+            RequestContext(
+                scenario=Scenario.USER_WITH_ACTIVE_DEBIT_CARD_ACCOUNT
+            )
+        )
+
+        assert_get_account_details_response_user_with_active_debit_card_account(
             response
         )
 
